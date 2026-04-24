@@ -1,8 +1,8 @@
 import { Container, Row, Col, Form, Button, CloseButton, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import logo from "../../../assets/logo.png"; // adjust path
-import login from "../../../assets/login.png"
-import '../../../Styles/Login.css'
+import logo from "../../assets/logo.png"; // adjust path
+import login from "../../assets/login.png"
+import '../../Styles/Login.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 ``

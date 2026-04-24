@@ -7,11 +7,11 @@ import Card from "react-bootstrap/Card";
 
 import AnimateOnScroll from "./homeAnimations/AnimationOnScroll";
 import CountUpNumber from "./homeAnimations/CountUpNumber";
-import logo from "../../assets/logo.png";
+import logo from "../assets/logo.png";
 
-import "../../Styles/Home.css";
-import Header from "../Header";
-import Footer from "../Footer";
+import "../Styles/Home.css";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 function Home() {
   /* ✅ Stats scroll detection */
