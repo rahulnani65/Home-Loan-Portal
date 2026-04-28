@@ -24,7 +24,7 @@ function Footer(){
                We help turn your dream of owning a home into reality with simple, transparent, and affordable home loan solutions.
             </p>
             <h6>Contact Us</h6>
-            <p className="mb-1">📞 +91 9999 999 999</p>
+            <p className="mb-1">📞 +91 98485 70949</p>
             <p>✉️ mlrrhomeloan@gmail.com</p>
           </Col>
  

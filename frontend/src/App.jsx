@@ -4,6 +4,7 @@ import './style.css'
 import Home from './pages/Home'
 import Login from './pages/auth/Login';
 import { LoanApply } from './Components/LoanForm';
+import Loans from './pages/loanpages/Loans';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/"        element={<Home />} />
         <Route path="/login"   element={<Login />} />
         <Route path="/apply"   element={<LoanApply />} />
+        <Route path="/loans"   element={<Loans />} />
       </Routes>
     </BrowserRouter>
   );

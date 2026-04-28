@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 
 import AnimateOnScroll from "./homeAnimations/AnimationOnScroll";
 import CountUpNumber from "./homeAnimations/CountUpNumber";
-import logo from "../assets/logo.png";
+import hero from "../assets/hero.png";
 
 import "../Styles/Home.css";
 import Header from "../Components/Header";
@@ -16,8 +16,13 @@ import hero from "../assets/hero.png";
 /* ── data ──────────────────────────────────────────────────────────────────── */
 const LOAN_TYPES = [
   { icon: "🏠", title: "Home Purchase",     desc: "Buy your dream home with competitive rates starting 8.35%" },
+<<<<<<< HEAD
   { icon: "🏘️", title: "NRI Home Purchase", desc: "Specially designed for Non-Resident Indians to invest in property back home" },
   { icon: "🔄", title: "Balance Transfer",  desc: "Move your existing loan to us and save on interest" },
+=======
+  { icon: "🌐", title: "NRI Home Purchase",     desc: "Specially designed for Non-Resident Indians to invest in property back home" },
+  { icon: "🏗️", title: "Plot Purchase",  desc: "Purchase a residential plot to build your dream home at your own pace" },
+>>>>>>> 2d80c1a (T-1)
   { icon: "🏡", title: "Home Renovation",   desc: "Upgrade your home with easy top-up loan options" },
 ];
 
@@ -81,7 +86,7 @@ function Home() {
             <Row className="align-items-center g-5">
               <Col lg={6}>
                 <div>
-                  <span style={{ color: "#fff", fontSize: "1.15rem" }}>Trusted by 50,000+ homeowners</span> 
+                  <span style={{color: "#ffffff", fontsize: "1.2rem"}}>Trusted by <span className="side-head">50,000+ </span>homeowners</span> 
                 </div>
                 <h1>
                   Make Your <span className="highlight">Dream Home</span> a Reality
@@ -107,8 +112,13 @@ function Home() {
                   </a>
                 </div>
               </Col>
+
             </Row>
           </Container>
+          {/* Image pinned to top-right of hero */}
+          <div className="hero-image-card d-none d-lg-block">
+            <img src={hero} alt="Dream Home" />
+          </div>
         </section>
 
         {/* ── LOAN TYPES ───────────────────────────────────────────────────── */}
@@ -268,7 +278,7 @@ function Home() {
           <section className="cta-section">
             <Container>
               <h2>Ready to Own Your Dream Home?</h2>
-              <p>Join 50,000+ happy homeowners. Apply online in minutes — no branch visit needed.</p>
+              <p>Join 50,000+ happy homeowners. Apply online in minutes no branch visit needed.</p>
               <div className="d-flex gap-3 justify-content-center flex-wrap">
                 <button className="btn-hero-primary" onClick={() => navigate("/apply")}>
                   Start Application →
