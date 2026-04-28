@@ -1,6 +1,6 @@
 import React from "react";
 import FormField from "./FormField";
-import "./LoanForm.css";
+import "../Styles/LoanForm.css";
 
 const StepRenderer = ({ step, formData, onChange, errors }) => {
   return (

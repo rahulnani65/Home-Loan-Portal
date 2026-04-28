@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './style.css'
 import Home from './pages/Home'
 import Login from './pages/auth/Login';
-import { LoanApply } from './Components/LoanForm';
 import Loans from './pages/loanpages/Loans';
+import LoanApply from './pages/loanpages/LoanApply';
 
 function App() {
   return (

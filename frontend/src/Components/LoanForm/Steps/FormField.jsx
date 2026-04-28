@@ -1,5 +1,5 @@
 import React from "react";
-import "./LoanForm.css";
+import "../Styles/LoanForm.css";
 
 const FormField = ({ field, value, onChange, error }) => {
   const { name, label, type, required, placeholder, options, accept } = field;

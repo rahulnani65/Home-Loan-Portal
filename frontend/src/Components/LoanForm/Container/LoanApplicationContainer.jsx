@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { LOAN_TYPES } from "../Config/loanTypeConfig";
-import StepProgressBar from "../Components/StepProgressBar";
-import StepRenderer from "../Components/StepRenderer";
-import "../Components/LoanForm.css";
+import { LOAN_TYPES } from "../../../utils/loanTypeConfig";
+import StepProgressBar from "../Steps/StepProgressBar";
+import StepRenderer from "../Steps/StepRenderer";
+import "../Styles/LoanForm.css";
 
 const generateRef = () =>
   "MLRR" + Date.now().toString().slice(-6) + Math.floor(Math.random() * 100);

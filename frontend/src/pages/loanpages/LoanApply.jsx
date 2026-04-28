@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { LOAN_TYPES } from "../Config/loanTypeConfig";
-import LoanApplicationContainer from "../Container/LoanApplicationContainer";
-import Header from "../../Header";
-import Footer from "../../Footer";
-import "../Components/LoanForm.css";
+import { LOAN_TYPES } from "../../utils/loanTypeConfig";
+import LoanApplicationContainer from "../../Components/LoanForm/Container/LoanApplicationContainer";
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
+import "../../Components/LoanForm/Styles/LoanForm.css";
 
 const LoanApply = () => {
   const [selectedType, setSelectedType] = useState(null);

@@ -11,18 +11,12 @@ import hero from "../assets/hero.png";
 import "../Styles/Home.css";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import hero from "../assets/hero.png";
 
 /* ── data ──────────────────────────────────────────────────────────────────── */
 const LOAN_TYPES = [
   { icon: "🏠", title: "Home Purchase",     desc: "Buy your dream home with competitive rates starting 8.35%" },
-<<<<<<< HEAD
   { icon: "🏘️", title: "NRI Home Purchase", desc: "Specially designed for Non-Resident Indians to invest in property back home" },
-  { icon: "🔄", title: "Balance Transfer",  desc: "Move your existing loan to us and save on interest" },
-=======
-  { icon: "🌐", title: "NRI Home Purchase",     desc: "Specially designed for Non-Resident Indians to invest in property back home" },
-  { icon: "🏗️", title: "Plot Purchase",  desc: "Purchase a residential plot to build your dream home at your own pace" },
->>>>>>> 2d80c1a (T-1)
+  { icon: "🏗️", title: "Plot Purchase",     desc: "Purchase a residential plot to build your dream home at your own pace" },
   { icon: "🏡", title: "Home Renovation",   desc: "Upgrade your home with easy top-up loan options" },
 ];
 

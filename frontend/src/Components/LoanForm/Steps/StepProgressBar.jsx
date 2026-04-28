@@ -1,5 +1,5 @@
 import React from "react";
-import "./LoanForm.css";
+import "../Styles/LoanForm.css";
 
 const StepProgressBar = ({ steps, currentStep }) => {
   return (
