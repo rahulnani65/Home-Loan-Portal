@@ -3,12 +3,13 @@ import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import google from "../../assets/google.png";
 import logo from "../../assets/logo.png";
 import login from "../../assets/login.png";
 import { loginUser } from "../../utils/auth";
 import '../../Styles/Login.css';
 
-const Login = ({ closeModal }) => {
+const Login = ({ closeModal,openRegister }) => {
   const navigate = useNavigate();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword]     = useState("");
@@ -59,7 +60,7 @@ const Login = ({ closeModal }) => {
                 <Image src={logo} height={60} className="mb-3" />
                 <h1 className="h4 fw-bold heading">Login to Your Account</h1>
                 <Button variant="light" className="border w-100 py-2 mt-2">
-                  <i className="fa-brands fa-google me-2 google-linear"></i>
+                   <Image src={google} height={20} className="me-2 google-linear" />
                   Continue with Google
                 </Button>
               </div>
@@ -116,9 +117,19 @@ const Login = ({ closeModal }) => {
                   >
                     {loading ? "Signing in..." : "Login"}
                   </Button>
-                  <p className="mb-0">
-                    Don't have an account? <a href="#">Create Account</a>
-                  </p>
+                  <p>
+                Don't have an account?{" "}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();   // stop page navigation
+                    openRegister();       // switch to Register modal
+                  }}
+                >
+                  Create Account
+                </a>
+              </p>
+
                 </div>
               </Form>
             </div>

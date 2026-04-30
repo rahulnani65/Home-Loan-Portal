@@ -27,17 +27,60 @@
   background-color: #ffffff;
 }
 
-.login-overlay {
+
+.overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7); /* 70% opacity */
+  inset: 0; /* ✅ replaces top/left/width/height */
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+
+  padding: 1rem;               /* ✅ space on small screens */
+  overflow-y: auto;            /* ✅ allow scroll if modal is tall */
+
+  /* Smooth appearance */
+  animation: overlayFadeIn 0.25s ease;
+}
+
+/* ===============================
+   Prevent background scroll
+================================ */
+body:has(.overlay) {
+  overflow: hidden;
+}
+
+/* ===============================
+   MOBILE OPTIMIZATION
+================================ */
+@media (max-width: 768px) {
+  .overlay {
+    align-items: flex-start;   /* ✅ better UX on mobile */
+    padding: 0.75rem;
+  }
+}
+
+/* ===============================
+   SMALL MOBILE DEVICES
+================================ */
+@media (max-width: 480px) {
+  .overlay {
+    padding: 0.5rem;
+  }
+}
+
+/* ===============================
+   FADE-IN ANIMATION
+================================ */
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 
