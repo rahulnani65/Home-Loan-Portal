@@ -10,6 +10,12 @@ import LeadsDetails from './pages/Agent/LeadsDetails';
 import { isLoggedIn } from './utils/auth';
 import MainLayout from './Layout/MainLayout';
 import EmiPage from './pages/calculators/EmiPage';
+import AdminHeader from './pages/Admin/AdminHeader';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminApplications from './pages/Admin/AdminApplications';
+import AdminAgents from './pages/Admin/AdminAgents';
+import AdminUsers from './pages/Admin/AdminUsers';
+import AdminLayout from './Layout/AdminLayout';
 
 // Redirect to home if not logged in
 const ProtectedRoute = ({ children }) => {
@@ -27,14 +33,24 @@ function App() {
         <Route path="/calculator" element={<EmiPage />} />
         <Route path="/apply" element={<LoanApply />} />
         <Route path="/agent" element={<LeadsDetails />} />
-        <Route
-          path="/dashboard/*"
-          element={
-            <ProtectedRoute>
-              <UserDashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/*" element={
+                                            <ProtectedRoute>
+                                              <UserDashboard />
+                                            </ProtectedRoute>
+                                          }/>
+       </Route>
+       <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+          <Route index element={<AdminDashboard />} />
+          <Route path="/admin/applications" element={<AdminApplications />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/agents" element={<AdminAgents />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -98,7 +98,7 @@ function Home() {
                 </div>
                 <div className="hero-actions">
                   <a className="btn-hero-primary" onClick={() => navigate("/loan-types")} style={{ cursor: "pointer" }}>
-                    Apply Now →
+                   Check Eligibility →
                   </a>
                   <a className="btn-hero-outline" href="#how-it-works">
                     How it works
