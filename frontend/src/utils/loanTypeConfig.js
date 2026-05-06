@@ -1,26 +1,30 @@
 // ─── SHARED STEP TEMPLATES ────────────────────────────────────────────────────
 const basicDetailsFields = [
-  { name: "fullName",      label: "Full Name",       type: "text",   required: true,  placeholder: "Enter your full name" },
-  { name: "dob",           label: "Date of Birth",   type: "date",   required: true },
-  { name: "gender",        label: "Gender",          type: "select", required: true,  options: ["Select Gender", "Male", "Female", "Other"] },
-  { name: "mobile",        label: "Mobile Number",   type: "tel",    required: true,  placeholder: "10-digit mobile number" },
-  { name: "email",         label: "Email Address",   type: "email",  required: true,  placeholder: "example@email.com" },
-  { name: "panCard",       label: "PAN Card Number", type: "text",   required: true,  placeholder: "ABCDE1234F" },
-  { name: "aadhar",        label: "Aadhar Number",   type: "text",   required: true,  placeholder: "12-digit Aadhar number" },
-  { name: "maritalStatus", label: "Marital Status",  type: "select", required: true,  options: ["Select Status", "Single", "Married", "Divorced", "Widowed"] },
+  { name: "fullName",           label: "Full Name",                  type: "text",     required: true,  placeholder: "Enter your full name",          pattern: "fullName" },
+  { name: "dob",                label: "Date of Birth",              type: "date",     required: true,                                                pattern: "dob" },
+  { name: "gender",             label: "Gender",                     type: "select",   required: true,  options: ["Select Gender", "Male", "Female", "Other"] },
+  { name: "mobile",             label: "Mobile Number",              type: "tel",      required: true,  placeholder: "10-digit mobile number",        pattern: "mobile" },
+  { name: "email",              label: "Email Address",              type: "email",    required: true,  placeholder: "example@email.com",             pattern: "email" },
+  { name: "panCard",            label: "PAN Card Number",            type: "text",     required: true,  placeholder: "ABCDE1234F",                    pattern: "panCard" },
+  { name: "aadharLast4",        label: "Aadhar Last 4 Digits",       type: "text",     required: true,  placeholder: "Enter last 4 digits of Aadhar", maxLength: 4, pattern: "aadharLast4" },
+  { name: "maritalStatus",      label: "Marital Status",             type: "select",   required: true,  options: ["Select Status", "Single", "Married", "Divorced", "Widowed"] },
+  { name: "residentialAddress", label: "Current Residential Address",type: "textarea", required: true,  placeholder: "Enter your current residential address" },
+  { name: "city",               label: "City",                       type: "text",     required: true,  placeholder: "Enter your city" },
+  { name: "state",              label: "State",                      type: "select",   required: true,  options: ["Select State", "Andhra Pradesh", "Telangana", "Karnataka", "Tamil Nadu", "Maharashtra", "Delhi", "Gujarat", "Rajasthan", "Uttar Pradesh", "West Bengal", "Other"] },
+  { name: "pinCode",            label: "PIN Code",                   type: "text",     required: true,  placeholder: "6-digit PIN",                   pattern: "pinCode" },
 ];
 
 const employmentFields = [
-  { name: "employmentType", label: "Employment Type",          type: "select", required: true, options: ["Select Type", "Salaried", "Self-Employed", "Business Owner", "Retired"] },
-  { name: "companyName",    label: "Company / Business Name",  type: "text",   required: true, placeholder: "Enter company name" },
-  { name: "designation",    label: "Designation",              type: "text",   required: true, placeholder: "Your job title" },
-  { name: "workExperience", label: "Total Work Experience",    type: "select", required: true, options: ["Select", "Less than 1 year", "1-3 years", "3-5 years", "5-10 years", "10+ years"] },
-  { name: "monthlyIncome",  label: "Monthly Income (₹)",       type: "number", required: true, placeholder: "Net monthly income" },
+  { name: "employmentType", label: "Employment Type",          type: "select",   required: true, options: ["Select Type", "Salaried", "Self-Employed", "Business Owner", "Retired"] },
+  { name: "companyName",    label: "Company / Business Name",  type: "text",     required: true, placeholder: "Enter company name" },
+  { name: "designation",    label: "Designation",              type: "text",     required: true, placeholder: "Your job title" },
+  { name: "workExperience", label: "Total Work Experience",    type: "select",   required: true, options: ["Select", "Less than 1 year", "1-3 years", "3-5 years", "5-10 years", "10+ years"] },
+  { name: "monthlyIncome",  label: "Monthly Income (₹)",       type: "number",   required: true, placeholder: "Net monthly income", pattern: "monthlyIncome" },
   { name: "officeAddress",  label: "Office Address",           type: "textarea", required: true, placeholder: "Full office address" },
 ];
 
 const financialFields = [
-  { name: "loanAmount",    label: "Loan Amount Required (₹)",    type: "number", required: true,  placeholder: "e.g. 5000000" },
+  { name: "loanAmount",    label: "Loan Amount Required (₹)",    type: "number", required: true,  placeholder: "e.g. 5000000",  pattern: "loanAmount" },
   { name: "loanTenure",    label: "Loan Tenure",                 type: "select", required: true,  options: ["Select Tenure", "5 years", "10 years", "15 years", "20 years", "25 years", "30 years"] },
   { name: "existingLoans", label: "Any Existing Loans?",         type: "select", required: true,  options: ["Select", "No", "Yes - Home Loan", "Yes - Car Loan", "Yes - Personal Loan", "Yes - Multiple"] },
   { name: "existingEMI",   label: "Existing EMI per month (₹)",  type: "number", required: false, placeholder: "0 if none" },
@@ -38,6 +42,32 @@ const basicDocFields = [
   { name: "itr",           label: "ITR / Form 16",               type: "file", required: false, accept: ".pdf" },
 ];
 
+// ─── SHARED CO-APPLICANT STEP ─────────────────────────────────────────────────
+const coApplicantStep = {
+  title: "Co-Applicant",
+  subtitle: "Co-applicant details (if any)",
+  fields: [
+    { name: "hasCoApplicant",    label: "Do you have a co-applicant?",          type: "select", required: true,  options: ["Select", "No", "Yes - Spouse", "Yes - Parent", "Yes - Sibling", "Yes - Other"] },
+    { name: "coApplicantName",   label: "Co-Applicant Full Name",               type: "text",   required: false, placeholder: "Full name" },
+    { name: "coApplicantRelation",label: "Relationship",                        type: "text",   required: false, placeholder: "e.g. Spouse, Parent" },
+    { name: "coApplicantMobile", label: "Co-Applicant Mobile",                  type: "tel",    required: false, placeholder: "10-digit mobile number" },
+    { name: "coApplicantIncome", label: "Co-Applicant Monthly Income (₹)",      type: "number", required: false, placeholder: "0 if not applicable" },
+    { name: "coApplicantPAN",    label: "Co-Applicant PAN",                     type: "text",   required: false, placeholder: "ABCDE1234F" },
+  ],
+};
+
+// ─── SHARED CONSENT STEP ──────────────────────────────────────────────────────
+const consentStep = {
+  title: "Consent",
+  subtitle: "Declaration and digital signature",
+  fields: [
+    { name: "consentDeclaration", label: "I declare that all information provided is true and correct to the best of my knowledge",          type: "checkbox", required: true },
+    { name: "consentCreditCheck", label: "I authorize MLRR Home Loans to perform credit checks and verify my information",                   type: "checkbox", required: true },
+    { name: "consentMarketing",   label: "I agree to receive updates about my application via SMS and email",                                type: "checkbox", required: false },
+    { name: "eSignature",         label: "Full Name as Digital Signature",  type: "text",     required: true,  placeholder: "Type your full name to sign" },
+  ],
+};
+
 // ─── LOAN TYPE CONFIGS ────────────────────────────────────────────────────────
 export const LOAN_TYPES = {
 
@@ -48,6 +78,7 @@ export const LOAN_TYPES = {
     icon: "🏠",
     steps: [
       { title: "Basic Details",      subtitle: "Tell us about yourself",          fields: basicDetailsFields },
+      coApplicantStep,
       { title: "Employment Details", subtitle: "Tell us about your work",         fields: employmentFields },
       {
         title: "Financial Details",
@@ -58,15 +89,16 @@ export const LOAN_TYPES = {
         title: "Property Details",
         subtitle: "About the property you want to buy",
         fields: [
-          { name: "propertyType",     label: "Property Type",                type: "select", required: true,  options: ["Select Type", "Apartment / Flat", "Independent House", "Villa", "Plot + Construction", "Under Construction"] },
-          { name: "propertyLocation", label: "Property Location",            type: "text",   required: true,  placeholder: "City, State" },
-          { name: "propertyValue",    label: "Estimated Property Value (₹)", type: "number", required: true,  placeholder: "e.g. 6000000" },
-          { name: "builderName",      label: "Builder / Seller Name",        type: "text",   required: false, placeholder: "If known" },
-          { name: "possessionStatus", label: "Possession Status",            type: "select", required: true,  options: ["Select", "Ready to Move", "Under Construction", "Resale"] },
-          { name: "propertyAddress",  label: "Property Address",             type: "textarea", required: true, placeholder: "Full property address" },
+          { name: "propertyType",     label: "Property Type",                type: "select",   required: true,  options: ["Select Type", "Apartment / Flat", "Independent House", "Villa", "Plot + Construction", "Under Construction"] },
+          { name: "propertyLocation", label: "Property Location",            type: "text",     required: true,  placeholder: "City, State" },
+          { name: "propertyValue",    label: "Estimated Property Value (₹)", type: "number",   required: true,  placeholder: "e.g. 6000000" },
+          { name: "builderName",      label: "Builder / Seller Name",        type: "text",     required: false, placeholder: "If known" },
+          { name: "possessionStatus", label: "Possession Status",            type: "select",   required: true,  options: ["Select", "Ready to Move", "Under Construction", "Resale"] },
+          { name: "propertyAddress",  label: "Property Address",             type: "textarea", required: true,  placeholder: "Full property address" },
         ],
       },
       { title: "Documents", subtitle: "Upload required documents", fields: basicDocFields },
+      consentStep,
     ],
   },
 
@@ -77,6 +109,7 @@ export const LOAN_TYPES = {
     icon: "🌎",
     steps: [
       { title: "Basic Details",      subtitle: "Tell us about yourself",  fields: basicDetailsFields },
+      coApplicantStep,
       { title: "Employment Details", subtitle: "Tell us about your work", fields: employmentFields },
       {
         title: "Financial Details",
@@ -87,13 +120,13 @@ export const LOAN_TYPES = {
         title: "Plot Details",
         subtitle: "About the plot you want to purchase",
         fields: [
-          { name: "plotLocation",    label: "Plot Location",                    type: "text",   required: true,  placeholder: "City, State" },
-          { name: "plotArea",        label: "Plot Area (sq yards / sq ft)",     type: "text",   required: true,  placeholder: "e.g. 200 sq yards" },
-          { name: "plotValue",       label: "Estimated Plot Value (₹)",         type: "number", required: true,  placeholder: "e.g. 3000000" },
-          { name: "dtcpApproved",    label: "DTCP / HMDA Approved?",            type: "select", required: true,  options: ["Select", "Yes", "No", "Pending Approval"] },
-          { name: "plotPurpose",     label: "Purpose of Plot",                  type: "select", required: true,  options: ["Select", "Residential Construction", "Investment", "Future Use"] },
-          { name: "sellerName",      label: "Seller / Developer Name",          type: "text",   required: false, placeholder: "If known" },
-          { name: "plotAddress",     label: "Plot Address",                     type: "textarea", required: true, placeholder: "Full plot address" },
+          { name: "plotLocation",    label: "Plot Location",                    type: "text",     required: true,  placeholder: "City, State" },
+          { name: "plotArea",        label: "Plot Area (sq yards / sq ft)",     type: "text",     required: true,  placeholder: "e.g. 200 sq yards" },
+          { name: "plotValue",       label: "Estimated Plot Value (₹)",         type: "number",   required: true,  placeholder: "e.g. 3000000" },
+          { name: "dtcpApproved",    label: "DTCP / HMDA Approved?",            type: "select",   required: true,  options: ["Select", "Yes", "No", "Pending Approval"] },
+          { name: "plotPurpose",     label: "Purpose of Plot",                  type: "select",   required: true,  options: ["Select", "Residential Construction", "Investment", "Future Use"] },
+          { name: "sellerName",      label: "Seller / Developer Name",          type: "text",     required: false, placeholder: "If known" },
+          { name: "plotAddress",     label: "Plot Address",                     type: "textarea", required: true,  placeholder: "Full plot address" },
         ],
       },
       {
@@ -109,6 +142,7 @@ export const LOAN_TYPES = {
           { name: "encumbrance",   label: "Encumbrance Certificate",     type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
         ],
       },
+      consentStep,
     ],
   },
 
@@ -122,18 +156,23 @@ export const LOAN_TYPES = {
         title: "Basic Details",
         subtitle: "Tell us about yourself",
         fields: [
-          { name: "fullName",       label: "Full Name",              type: "text",   required: true,  placeholder: "Enter your full name" },
-          { name: "dob",            label: "Date of Birth",          type: "date",   required: true },
-          { name: "gender",         label: "Gender",                 type: "select", required: true,  options: ["Select Gender", "Male", "Female", "Other"] },
-          { name: "mobile",         label: "Mobile Number (India)",  type: "tel",    required: true,  placeholder: "10-digit Indian mobile" },
-          { name: "overseasMobile", label: "Overseas Mobile",        type: "tel",    required: false, placeholder: "Country code + number" },
-          { name: "email",          label: "Email Address",          type: "email",  required: true,  placeholder: "example@email.com" },
-          { name: "panCard",        label: "PAN Card Number",        type: "text",   required: true,  placeholder: "ABCDE1234F" },
-          { name: "passport",       label: "Passport Number",        type: "text",   required: true,  placeholder: "Enter passport number" },
-          { name: "countryOfResidence", label: "Country of Residence", type: "text", required: true,  placeholder: "e.g. USA, UAE, UK" },
-          { name: "visaType",       label: "Visa / Residency Type",  type: "select", required: true,  options: ["Select", "Work Visa", "Permanent Residency", "Citizenship", "Student Visa"] },
+          { name: "fullName",           label: "Full Name",                    type: "text",     required: true,  placeholder: "Enter your full name",          pattern: "fullName" },
+          { name: "dob",                label: "Date of Birth",                type: "date",     required: true,                                                pattern: "dob" },
+          { name: "gender",             label: "Gender",                       type: "select",   required: true,  options: ["Select Gender", "Male", "Female", "Other"] },
+          { name: "mobile",             label: "Mobile Number (India)",        type: "tel",      required: true,  placeholder: "10-digit Indian mobile",        pattern: "mobile" },
+          { name: "overseasMobile",     label: "Overseas Mobile",              type: "tel",      required: false, placeholder: "Country code + number" },
+          { name: "email",              label: "Email Address",                type: "email",    required: true,  placeholder: "example@email.com",             pattern: "email" },
+          { name: "panCard",            label: "PAN Card Number",              type: "text",     required: true,  placeholder: "ABCDE1234F",                    pattern: "panCard" },
+          { name: "passport",           label: "Passport Number",              type: "text",     required: true,  placeholder: "Enter passport number",         pattern: "passport" },
+          { name: "countryOfResidence", label: "Country of Residence",         type: "text",     required: true,  placeholder: "e.g. USA, UAE, UK" },
+          { name: "visaType",           label: "Visa / Residency Type",        type: "select",   required: true,  options: ["Select", "Work Visa", "Permanent Residency", "Citizenship", "Student Visa"] },
+          { name: "residentialAddress", label: "Current Residential Address",  type: "textarea", required: true,  placeholder: "Enter your current residential address" },
+          { name: "city",               label: "City",                         type: "text",     required: true,  placeholder: "Enter your city" },
+          { name: "state",              label: "State",                        type: "select",   required: true,  options: ["Select State", "Andhra Pradesh", "Telangana", "Karnataka", "Tamil Nadu", "Maharashtra", "Delhi", "Gujarat", "Rajasthan", "Uttar Pradesh", "West Bengal", "Other"] },
+          { name: "pinCode",            label: "PIN Code",                     type: "text",     required: true,  placeholder: "6-digit PIN",                   pattern: "pinCode" },
         ],
       },
+      coApplicantStep,
       {
         title: "Employment Details",
         subtitle: "Your overseas employment",
@@ -141,7 +180,7 @@ export const LOAN_TYPES = {
           { name: "employmentType",  label: "Employment Type",          type: "select", required: true,  options: ["Select Type", "Salaried Abroad", "Self-Employed Abroad", "Business Owner"] },
           { name: "companyName",     label: "Employer / Company Name",  type: "text",   required: true,  placeholder: "Company name" },
           { name: "workExperience",  label: "Total Work Experience",    type: "select", required: true,  options: ["Select", "Less than 1 year", "1-3 years", "3-5 years", "5+ years"] },
-          { name: "monthlyIncome",   label: "Monthly Income (₹ equiv)", type: "number", required: true,  placeholder: "Converted to INR" },
+          { name: "monthlyIncome",   label: "Monthly Income (₹ equiv)", type: "number", required: true,  placeholder: "Converted to INR", pattern: "monthlyIncome" },
           { name: "incomeCurrency",  label: "Income Currency",          type: "select", required: true,  options: ["Select", "USD", "AED", "GBP", "EUR", "SGD", "AUD", "Other"] },
         ],
       },
@@ -149,38 +188,39 @@ export const LOAN_TYPES = {
         title: "Financial Details",
         subtitle: "Your financial background",
         fields: [
-          { name: "loanAmount",    label: "Loan Amount Required (₹)",   type: "number", required: true,  placeholder: "e.g. 5000000" },
-          { name: "loanTenure",    label: "Loan Tenure",                 type: "select", required: true,  options: ["Select Tenure", "5 years", "10 years", "15 years", "20 years", "25 years"] },
-          { name: "nreAccount",    label: "NRE / NRO Account Number",   type: "text",   required: true,  placeholder: "Indian bank account" },
-          { name: "bankName",      label: "Indian Bank Name",            type: "text",   required: true,  placeholder: "Bank where NRE/NRO held" },
-          { name: "remittanceMode",label: "Repayment Mode",              type: "select", required: true,  options: ["Select", "NRE Account", "NRO Account", "FCNR Account", "Direct Remittance"] },
-          { name: "cibilScore",    label: "Approximate CIBIL Score",    type: "select", required: true,  options: ["Select", "Below 650", "650-700", "700-750", "750-800", "800+", "Don't Know"] },
+          { name: "loanAmount",     label: "Loan Amount Required (₹)",   type: "number", required: true,  placeholder: "e.g. 5000000", pattern: "loanAmount" },
+          { name: "loanTenure",     label: "Loan Tenure",                 type: "select", required: true,  options: ["Select Tenure", "5 years", "10 years", "15 years", "20 years", "25 years"] },
+          { name: "nreAccount",     label: "NRE / NRO Account Number",   type: "text",   required: true,  placeholder: "Indian bank account" },
+          { name: "bankName",       label: "Indian Bank Name",            type: "text",   required: true,  placeholder: "Bank where NRE/NRO held" },
+          { name: "remittanceMode", label: "Repayment Mode",              type: "select", required: true,  options: ["Select", "NRE Account", "NRO Account", "FCNR Account", "Direct Remittance"] },
+          { name: "cibilScore",     label: "Approximate CIBIL Score",    type: "select", required: true,  options: ["Select", "Below 650", "650-700", "700-750", "750-800", "800+", "Don't Know"] },
         ],
       },
       {
         title: "Property Details",
         subtitle: "About the property in India",
         fields: [
-          { name: "propertyType",     label: "Property Type",                type: "select", required: true,  options: ["Select Type", "Apartment / Flat", "Independent House", "Villa", "Under Construction"] },
-          { name: "propertyLocation", label: "Property Location",            type: "text",   required: true,  placeholder: "City, State" },
-          { name: "propertyValue",    label: "Estimated Property Value (₹)", type: "number", required: true,  placeholder: "e.g. 6000000" },
-          { name: "poaHolder",        label: "Power of Attorney Holder",     type: "text",   required: false, placeholder: "Name of POA holder in India" },
-          { name: "propertyAddress",  label: "Property Address",             type: "textarea", required: true, placeholder: "Full property address" },
+          { name: "propertyType",     label: "Property Type",                type: "select",   required: true,  options: ["Select Type", "Apartment / Flat", "Independent House", "Villa", "Under Construction"] },
+          { name: "propertyLocation", label: "Property Location",            type: "text",     required: true,  placeholder: "City, State" },
+          { name: "propertyValue",    label: "Estimated Property Value (₹)", type: "number",   required: true,  placeholder: "e.g. 6000000" },
+          { name: "poaHolder",        label: "Power of Attorney Holder",     type: "text",     required: false, placeholder: "Name of POA holder in India" },
+          { name: "propertyAddress",  label: "Property Address",             type: "textarea", required: true,  placeholder: "Full property address" },
         ],
       },
       {
         title: "Documents",
         subtitle: "Upload required documents",
         fields: [
-          { name: "panDoc",        label: "PAN Card",                      type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
-          { name: "passportDoc",   label: "Passport Copy",                 type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
-          { name: "visaDoc",       label: "Valid Visa / Residency Proof",  type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
-          { name: "photoDoc",      label: "Passport Size Photo",           type: "file", required: true,  accept: ".jpg,.jpeg,.png" },
-          { name: "salarySlip",    label: "Last 3 Salary Slips (Overseas)",type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
-          { name: "bankStatement", label: "NRE/NRO Bank Statement (6 months)", type: "file", required: true, accept: ".pdf" },
+          { name: "panDoc",        label: "PAN Card",                          type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
+          { name: "passportDoc",   label: "Passport Copy",                     type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
+          { name: "visaDoc",       label: "Valid Visa / Residency Proof",      type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
+          { name: "photoDoc",      label: "Passport Size Photo",               type: "file", required: true,  accept: ".jpg,.jpeg,.png" },
+          { name: "salarySlip",    label: "Last 3 Salary Slips (Overseas)",    type: "file", required: true,  accept: ".pdf,.jpg,.jpeg,.png" },
+          { name: "bankStatement", label: "NRE/NRO Bank Statement (6 months)", type: "file", required: true,  accept: ".pdf" },
           { name: "poaDoc",        label: "Power of Attorney (if applicable)", type: "file", required: false, accept: ".pdf,.jpg,.jpeg,.png" },
         ],
       },
+      consentStep,
     ],
   },
 
