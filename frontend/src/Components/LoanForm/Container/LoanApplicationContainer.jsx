@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LOAN_TYPES } from "../../../utils/loanTypeConfig";
+import { FIELD_VALIDATORS } from "../../../Validations/loan.schema";
 import StepProgressBar from "../Steps/StepProgressBar";
 import StepRenderer from "../Steps/StepRenderer";
 import "../Styles/LoanForm.css";
@@ -27,11 +28,19 @@ const LoanApplicationContainer = ({ loanTypeKey }) => {
     const step = steps[currentStep];
     const newErrors = {};
     step.fields.forEach((field) => {
+      const val = formData[field.name];
       if (field.required) {
-        const val = formData[field.name];
-        if (!val || (typeof val === "string" && val.trim() === "")) {
+        if (field.type === "checkbox") {
+          if (!val) { newErrors[field.name] = `${field.label} — consent is required`; return; }
+        } else if (!val || (typeof val === "string" && val.trim() === "")) {
           newErrors[field.name] = `${field.label} is required`;
+          return;
         }
+      }
+      // Pattern validation
+      if (val && field.pattern && FIELD_VALIDATORS[field.pattern]) {
+        const err = FIELD_VALIDATORS[field.pattern](val);
+        if (err) newErrors[field.name] = err;
       }
     });
     setErrors(newErrors);
@@ -162,6 +171,35 @@ const LoanApplicationContainer = ({ loanTypeKey }) => {
           {!isLastStep && (
             <div className="lf-next-hint">
               Next: <strong>{steps[currentStep + 1].title}</strong> — {steps[currentStep + 1].subtitle}
+            </div>
+          )}
+
+          {/* Review summary on last (consent) step */}
+          {isLastStep && (
+            <div className="lf-review-summary">
+              <h4 className="lf-review-title">📋 Review Your Application</h4>
+              <p className="lf-review-subtitle">Please review all details before signing and submitting.</p>
+              {steps.slice(0, -1).map((step, si) => {
+                const filledFields = step.fields.filter(f => f.type !== "file" && formData[f.name]);
+                if (filledFields.length === 0) return null;
+                return (
+                  <div key={si} className="lf-review-section">
+                    <div className="lf-review-section-title">{step.title}</div>
+                    <div className="lf-review-fields">
+                      {filledFields.map(f => (
+                        <div key={f.name} className="lf-review-field">
+                          <span className="lf-review-label">{f.label}</span>
+                          <span className="lf-review-value">
+                            {typeof formData[f.name] === "boolean"
+                              ? (formData[f.name] ? "Yes" : "No")
+                              : formData[f.name]}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
 
